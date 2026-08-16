@@ -1,0 +1,291 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1786855923287,
+  "projectRoot": "D:\\PROJECT2010\\develop_project\\webdev\\5.twobite-link",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "next",
+        "version": "16.3.0",
+        "category": "fullstack"
+      },
+      {
+        "name": "react",
+        "version": "19.2.8",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "19.2.8",
+        "category": "frontend"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": null,
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "eslint"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "app",
+      "components",
+      "public"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "app": {
+      "path": "app",
+      "purpose": "Application code",
+      "fileCount": 4,
+      "lastAccessed": 1786855922998,
+      "keyFiles": [
+        "favicon.ico",
+        "globals.css",
+        "layout.tsx",
+        "page.tsx"
+      ]
+    },
+    "components": {
+      "path": "components",
+      "purpose": "UI components",
+      "fileCount": 10,
+      "lastAccessed": 1786855923028,
+      "keyFiles": [
+        "empty-state.tsx",
+        "icons.tsx",
+        "link-card.tsx",
+        "link-grid.tsx",
+        "logo.tsx"
+      ]
+    },
+    "prompt": {
+      "path": "prompt",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1786855923029,
+      "keyFiles": [
+        "prompt1.md"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 5,
+      "lastAccessed": 1786855923031,
+      "keyFiles": [
+        "file.svg",
+        "globe.svg",
+        "next.svg",
+        "vercel.svg",
+        "window.svg"
+      ]
+    },
+    "app\\lib": {
+      "path": "app\\lib",
+      "purpose": "Library code",
+      "fileCount": 2,
+      "lastAccessed": 1786855923033,
+      "keyFiles": [
+        "mock-data.ts",
+        "types.ts"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "components/new-link-form.tsx",
+      "accessCount": 5,
+      "lastAccessed": 1786857008456,
+      "type": "file"
+    },
+    {
+      "path": "components/icons.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1786856173953,
+      "type": "file"
+    },
+    {
+      "path": "components/new-link-button.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1786856235036,
+      "type": "file"
+    },
+    {
+      "path": "components/sidebar-item.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1786856975431,
+      "type": "file"
+    },
+    {
+      "path": "components/sidebar.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1786856981383,
+      "type": "file"
+    },
+    {
+      "path": "components/workspace.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1786856991451,
+      "type": "file"
+    },
+    {
+      "path": "components/folder-select.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1786857013565,
+      "type": "file"
+    },
+    {
+      "path": "app/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1786857023908,
+      "type": "file"
+    },
+    {
+      "path": "app/new/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1786857026940,
+      "type": "file"
+    },
+    {
+      "path": "app/layout.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786856020867,
+      "type": "file"
+    },
+    {
+      "path": "components/site-header.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786856024211,
+      "type": "file"
+    },
+    {
+      "path": "app/lib/types.ts",
+      "accessCount": 1,
+      "lastAccessed": 1786856029984,
+      "type": "file"
+    },
+    {
+      "path": "app/lib/mock-data.ts",
+      "accessCount": 1,
+      "lastAccessed": 1786856032380,
+      "type": "file"
+    },
+    {
+      "path": "components/empty-state.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786856035977,
+      "type": "file"
+    },
+    {
+      "path": "components/logo.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786856036329,
+      "type": "file"
+    },
+    {
+      "path": "components/form-field.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786856185659,
+      "type": "file"
+    },
+    {
+      "path": "components/url-input.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786856194309,
+      "type": "file"
+    },
+    {
+      "path": "components/save-button.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786856202468,
+      "type": "file"
+    },
+    {
+      "path": "components/new-link-workspace.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786856224435,
+      "type": "file"
+    },
+    {
+      "path": "components/link-grid.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786856858639,
+      "type": "file"
+    },
+    {
+      "path": "components/link-card.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786856859588,
+      "type": "file"
+    },
+    {
+      "path": "components/page-shell.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786856987300,
+      "type": "file"
+    },
+    {
+      "path": "components/link-section.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786856995815,
+      "type": "file"
+    },
+    {
+      "path": "components/new-link-panel.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786857016667,
+      "type": "file"
+    },
+    {
+      "path": "app/folder/[folderId]/page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786857031295,
+      "type": "file"
+    },
+    {
+      "path": "app/folder/[folderId]/not-found.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1786857043350,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

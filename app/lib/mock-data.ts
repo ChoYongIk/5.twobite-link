@@ -1,0 +1,126 @@
+import type { Folder, LinkItem } from "./types";
+
+export const folders: Folder[] = [
+  { id: "reading", name: "읽을거리", emoji: "📚" },
+  { id: "dev", name: "개발", emoji: "🛠️" },
+  { id: "design", name: "디자인", emoji: "🎨" },
+  { id: "product", name: "프로덕트", emoji: "🧭" },
+  { id: "recipe", name: "레시피", emoji: "🍳" },
+  { id: "later", name: "나중에 보기", emoji: "🕒" },
+];
+
+export const links: LinkItem[] = [
+  {
+    id: "l1",
+    title: "Next.js App Router 완전 정복",
+    description:
+      "서버 컴포넌트와 라우팅 규칙을 처음부터 정리한 공식 가이드 요약본.",
+    url: "https://nextjs.org/docs/app",
+    folderId: "dev",
+    tags: ["nextjs", "react"],
+    createdAt: "2026.08.02",
+  },
+  {
+    id: "l2",
+    title: "Tailwind CSS v4 마이그레이션 노트",
+    description:
+      "설정 파일 없이 CSS 우선으로 바뀐 v4의 변경점과 실전 대응 방법.",
+    url: "https://tailwindcss.com/blog",
+    folderId: "dev",
+    tags: ["css", "tailwind"],
+    createdAt: "2026.07.29",
+  },
+  {
+    id: "l3",
+    title: "좋은 타이포그래피의 12가지 규칙",
+    description: "본문 가독성을 좌우하는 행간, 자간, 측정값에 대한 실용 가이드.",
+    url: "https://practicaltypography.com",
+    folderId: "design",
+    tags: ["typography"],
+    createdAt: "2026.07.27",
+  },
+  {
+    id: "l4",
+    title: "디자인 시스템 컬러 토큰 설계",
+    description:
+      "라이트/다크 모드를 함께 지탱하는 시맨틱 컬러 토큰 네이밍 전략.",
+    url: "https://www.designsystems.com/color",
+    folderId: "design",
+    tags: ["design-system", "color"],
+    createdAt: "2026.07.24",
+  },
+  {
+    id: "l5",
+    title: "작은 팀을 위한 제품 로드맵",
+    description: "분기 단위 계획 대신 문제 중심으로 로드맵을 구성하는 방법.",
+    url: "https://www.svpg.com/product-roadmaps",
+    folderId: "product",
+    tags: ["roadmap", "planning"],
+    createdAt: "2026.07.21",
+  },
+  {
+    id: "l6",
+    title: "사용자 인터뷰에서 진짜 문제 찾기",
+    description:
+      "기능 요청 뒤에 숨은 맥락을 끌어내는 질문 설계와 기록 템플릿 모음.",
+    url: "https://www.nngroup.com/articles/user-interviews",
+    folderId: "product",
+    tags: ["ux-research"],
+    createdAt: "2026.07.18",
+  },
+  {
+    id: "l7",
+    title: "집중력을 회복하는 읽기 습관",
+    description: "긴 글을 끝까지 읽기 위한 환경 설계와 메모 루틴에 대한 에세이.",
+    url: "https://www.theatlantic.com/technology",
+    folderId: "reading",
+    tags: ["essay", "habit"],
+    createdAt: "2026.07.15",
+  },
+  {
+    id: "l8",
+    title: "매일 30분 읽기 챌린지 회고",
+    description: "3개월간 읽기 기록을 남기며 배운 것들과 실패한 방법들.",
+    url: "https://blog.readwise.io",
+    folderId: "reading",
+    tags: ["retrospective"],
+    createdAt: "2026.07.11",
+  },
+  {
+    id: "l9",
+    title: "15분 완성 토마토 파스타",
+    description: "재료 다섯 가지로 만드는 평일 저녁용 초간단 파스타 레시피.",
+    url: "https://www.seriouseats.com/pasta",
+    folderId: "recipe",
+    tags: ["pasta", "quick"],
+    createdAt: "2026.07.08",
+  },
+  {
+    id: "l10",
+    title: "홈카페 원두 추출 비율표",
+    description: "드립, 프렌치프레스, 에어로프레스별 물과 원두의 황금 비율.",
+    url: "https://www.baristahustle.com/brew-ratio",
+    folderId: "recipe",
+    tags: ["coffee"],
+    createdAt: "2026.07.05",
+  },
+  {
+    id: "l11",
+    title: "TypeScript 5.x 타입 레벨 트릭",
+    description:
+      "실무에서 자주 쓰는 조건부 타입과 템플릿 리터럴 타입 패턴 정리.",
+    url: "https://www.typescriptlang.org/docs",
+    folderId: "later",
+    tags: ["typescript"],
+    createdAt: "2026.07.02",
+  },
+  {
+    id: "l12",
+    title: "웹 성능 예산 세우기",
+    description: "Core Web Vitals를 기준으로 팀의 성능 예산을 정하는 실전 절차.",
+    url: "https://web.dev/performance-budgets",
+    folderId: "later",
+    tags: ["performance", "web-vitals"],
+    createdAt: "2026.06.28",
+  },
+];
