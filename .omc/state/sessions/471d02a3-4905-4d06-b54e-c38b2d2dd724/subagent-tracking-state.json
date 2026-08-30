@@ -32,10 +32,54 @@
       "synthetic": true,
       "telemetry_status": "unmatched_stop",
       "telemetry_note": "SubagentStop arrived without a matching SubagentStart; native Agent/Task start telemetry was not observed."
+    },
+    {
+      "agent_id": "a4c9e73500bba6168",
+      "agent_type": "untracked-native-fork",
+      "started_at": "2026-08-30T08:11:19.722Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-08-30T08:11:19.722Z",
+      "synthetic": true,
+      "telemetry_status": "unmatched_stop",
+      "telemetry_note": "SubagentStop arrived without a matching SubagentStart; native Agent/Task start telemetry was not observed."
+    },
+    {
+      "agent_id": "a5875fbfe0cedcd55",
+      "agent_type": "untracked-native-fork",
+      "started_at": "2026-08-30T08:22:11.276Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-08-30T08:22:11.276Z",
+      "synthetic": true,
+      "telemetry_status": "unmatched_stop",
+      "telemetry_note": "SubagentStop arrived without a matching SubagentStart; native Agent/Task start telemetry was not observed."
+    },
+    {
+      "agent_id": "aeb2be39e8b875945",
+      "agent_type": "untracked-native-fork",
+      "started_at": "2026-08-30T08:52:01.586Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-08-30T08:52:01.586Z",
+      "synthetic": true,
+      "telemetry_status": "unmatched_stop",
+      "telemetry_note": "SubagentStop arrived without a matching SubagentStart; native Agent/Task start telemetry was not observed."
+    },
+    {
+      "agent_id": "a9323c8cf384b51cd",
+      "agent_type": "untracked-native-fork",
+      "started_at": "2026-08-30T08:52:06.556Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-08-30T08:52:06.556Z",
+      "synthetic": true,
+      "telemetry_status": "unmatched_stop",
+      "telemetry_note": "SubagentStop arrived without a matching SubagentStart; native Agent/Task start telemetry was not observed."
     }
   ],
   "total_spawned": 0,
-  "total_completed": 3,
+  "total_completed": 7,
   "total_failed": 0,
-  "last_updated": "2026-08-30T07:26:44.191Z"
+  "last_updated": "2026-08-30T08:52:06.675Z"
 }

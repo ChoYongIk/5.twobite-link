@@ -1,22 +1,42 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import { DeleteFolderModal } from "./delete-folder-modal";
+import { FolderNameModal } from "./folder-name-modal";
 import { useFolders } from "./folders-provider";
 import { InboxIcon } from "./icons";
+import { useLinks } from "./links-provider";
 import { SidebarItem } from "./sidebar-item";
-import type { LinkItem } from "@/app/lib/types";
+import type { Folder } from "@/app/lib/types";
 
-type SidebarProps = {
-  /** 폴더별 링크 개수를 세는 데 사용합니다. */
-  links: LinkItem[];
-};
-
-export function Sidebar({ links }: SidebarProps) {
+export function Sidebar() {
   const pathname = usePathname();
-  const { folders } = useFolders();
+  const router = useRouter();
+  const { folders, renameFolder, removeFolder } = useFolders();
+  const { links } = useLinks();
+  const [folderToEdit, setFolderToEdit] = useState<Folder | null>(null);
+  const [folderToDelete, setFolderToDelete] = useState<Folder | null>(null);
 
   const countOf = (folderId: string) =>
     links.filter((link) => link.folderId === folderId).length;
+
+  const handleRename = (name: string) => {
+    if (folderToEdit) {
+      renameFolder(folderToEdit.id, name);
+    }
+    setFolderToEdit(null);
+  };
+
+  const handleConfirmDelete = (folder: Folder) => {
+    removeFolder(folder.id);
+    setFolderToDelete(null);
+
+    // 보고 있던 폴더를 지웠다면 갈 곳이 없어지므로 전체 링크로 옮깁니다.
+    if (pathname === `/folder/${folder.id}`) {
+      router.push("/");
+    }
+  };
 
   return (
     <aside className="w-full shrink-0 md:sticky md:top-[72px] md:w-[220px] md:self-start">
@@ -49,11 +69,27 @@ export function Sidebar({ links }: SidebarProps) {
                 count={countOf(folder.id)}
                 href={href}
                 active={pathname === href}
+                onEdit={() => setFolderToEdit(folder)}
+                onDelete={() => setFolderToDelete(folder)}
               />
             </div>
           );
         })}
       </nav>
+
+      <FolderNameModal
+        open={folderToEdit !== null}
+        title="폴더 이름 수정"
+        folder={folderToEdit}
+        onClose={() => setFolderToEdit(null)}
+        onSubmit={handleRename}
+      />
+
+      <DeleteFolderModal
+        folder={folderToDelete}
+        onClose={() => setFolderToDelete(null)}
+        onConfirm={handleConfirmDelete}
+      />
     </aside>
   );
 }

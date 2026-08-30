@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FoldersProvider } from "@/components/folders-provider";
-import { folders } from "./lib/mock-data";
+import { LinksProvider } from "@/components/links-provider";
+import { folders, links } from "./lib/mock-data";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,7 +13,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ko" className="h-full">
       <body className="flex min-h-full flex-col">
-        <FoldersProvider initialFolders={folders}>{children}</FoldersProvider>
+        <FoldersProvider initialFolders={folders}>
+          <LinksProvider initialLinks={links}>{children}</LinksProvider>
+        </FoldersProvider>
       </body>
     </html>
   );

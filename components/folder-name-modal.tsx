@@ -3,17 +3,29 @@
 import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import { useFolders } from "./folders-provider";
 import { FormField, fieldClass } from "./form-field";
+import type { Folder } from "@/app/lib/types";
 
-const NAME_FIELD_ID = "new-folder-name";
+const NAME_FIELD_ID = "folder-name";
 
-type NewFolderModalProps = {
+type FolderNameModalProps = {
   open: boolean;
+  title: string;
+  /** 이름을 고치는 중인 폴더. 새 폴더를 만들 때는 넘기지 않습니다. */
+  folder?: Folder | null;
   onClose: () => void;
+  onSubmit: (name: string) => void;
 };
 
-export function NewFolderModal({ open, onClose }: NewFolderModalProps) {
+/** 폴더 이름을 입력받는 모달. 새 폴더 만들기와 이름 수정이 함께 씁니다. */
+export function FolderNameModal({
+  open,
+  title,
+  folder,
+  onClose,
+  onSubmit,
+}: FolderNameModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const { addFolder, hasFolderNamed } = useFolders();
+  const { hasFolderNamed } = useFolders();
   const [name, setName] = useState("");
   const [error, setError] = useState<string>();
 
@@ -25,13 +37,13 @@ export function NewFolderModal({ open, onClose }: NewFolderModalProps) {
     }
 
     if (open && !dialog.open) {
-      setName("");
+      setName(folder?.name ?? "");
       setError(undefined);
       dialog.showModal();
     } else if (!open && dialog.open) {
       dialog.close();
     }
-  }, [open]);
+  }, [open, folder]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -41,13 +53,12 @@ export function NewFolderModal({ open, onClose }: NewFolderModalProps) {
       setError("폴더 이름을 입력해 주세요.");
       return;
     }
-    if (hasFolderNamed(trimmed)) {
+    if (hasFolderNamed(trimmed, folder?.id)) {
       setError("같은 이름의 폴더가 이미 있어요.");
       return;
     }
 
-    addFolder(trimmed);
-    onClose();
+    onSubmit(trimmed);
   };
 
   // 패널 바깥(백드롭)을 누르면 닫습니다. 패널 안쪽 클릭은 form이 받습니다.
@@ -62,15 +73,15 @@ export function NewFolderModal({ open, onClose }: NewFolderModalProps) {
       ref={dialogRef}
       onClose={onClose}
       onClick={handleBackdropClick}
-      aria-labelledby="new-folder-title"
+      aria-labelledby="folder-name-title"
       className="modal"
     >
       <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-6 p-6">
         <h2
-          id="new-folder-title"
+          id="folder-name-title"
           className="text-[24px] leading-[1.2] font-semibold tracking-[-0.3px] text-[var(--text)]"
         >
-          새 폴더
+          {title}
         </h2>
 
         <FormField

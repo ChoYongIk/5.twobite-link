@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { FolderView } from "@/components/folder-view";
 import { PageShell } from "@/components/page-shell";
 import { Workspace } from "@/components/workspace";
-import { folders, links } from "@/app/lib/mock-data";
+import { folders } from "@/app/lib/mock-data";
 
 export function generateStaticParams() {
   return folders.map((folder) => ({ folderId: folder.id }));
@@ -32,8 +32,8 @@ export default async function FolderPage({
 
   return (
     <PageShell>
-      <Workspace links={links}>
-        <FolderView folderId={folderId} links={links} />
+      <Workspace>
+        <FolderView folderId={folderId} />
       </Workspace>
     </PageShell>
   );

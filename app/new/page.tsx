@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { NewLinkPanel } from "@/components/new-link-panel";
 import { PageShell } from "@/components/page-shell";
 import { Workspace } from "@/components/workspace";
-import { links } from "../lib/mock-data";
 
 export const metadata: Metadata = {
   title: "새 링크 | 한입 링크",
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
 export default function NewLinkPage() {
   return (
     <PageShell>
-      <Workspace links={links}>
+      <Workspace>
         <NewLinkPanel />
       </Workspace>
     </PageShell>

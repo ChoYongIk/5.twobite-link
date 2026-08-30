@@ -14,6 +14,19 @@ export function LinkCard({ link }: { link: LinkItem }) {
 
   return (
     <article className="card group relative flex h-full flex-col p-6">
+      {link.thumbnail ? (
+        <div className="mb-5 overflow-hidden rounded-lg bg-[var(--fill)]">
+          {/* 썸네일 도메인이 링크마다 달라, 호스트를 열어 두는 next/image 설정 대신 원본을 그대로 씁니다. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={link.thumbnail}
+            alt=""
+            loading="lazy"
+            className="aspect-video w-full object-cover"
+          />
+        </div>
+      ) : null}
+
       <div className="flex items-start gap-3">
         <h3 className="min-w-0 flex-1 text-[17px] leading-[1.4] font-semibold tracking-[-0.2px] text-[var(--text)]">
           <a

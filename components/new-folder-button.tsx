@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { FolderNameModal } from "./folder-name-modal";
+import { useFolders } from "./folders-provider";
 import { FolderPlusIcon } from "./icons";
-import { NewFolderModal } from "./new-folder-modal";
 
 export function NewFolderButton() {
+  const { addFolder } = useFolders();
   const [open, setOpen] = useState(false);
 
   return (
@@ -18,7 +20,15 @@ export function NewFolderButton() {
         <span>새 폴더</span>
       </button>
 
-      <NewFolderModal open={open} onClose={() => setOpen(false)} />
+      <FolderNameModal
+        open={open}
+        title="새 폴더"
+        onClose={() => setOpen(false)}
+        onSubmit={(name) => {
+          addFolder(name);
+          setOpen(false);
+        }}
+      />
     </>
   );
 }

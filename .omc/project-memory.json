@@ -146,6 +146,13 @@
       ]
     }
   },
-  "hotPaths": [],
+  "hotPaths": [
+    {
+      "path": "app/api/og/route.ts",
+      "accessCount": 3,
+      "lastAccessed": 1788079301242,
+      "type": "file"
+    }
+  ],
   "userDirectives": []
 }

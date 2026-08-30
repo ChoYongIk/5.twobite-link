@@ -17,6 +17,7 @@
   --accent: #0071e3;
   --accent-hover: #0077ed;
   --error: #ff3b30;
+  --error-hover: #d70015;
   /* 가이드의 #34C759는 흰 배경 대비 2.2:1이라 3:1을 넘도록 낮췄습니다. */
   --success: #248a3d;
   --header-bg: rgba(255, 255, 255, 0.72);
@@ -84,6 +85,71 @@ body {
   .btn-secondary:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
+  }
+
+  /* 삭제처럼 되돌리기 어려운 동작을 확인할 때 쓰는 버튼. */
+  .btn-danger {
+    background-color: var(--error);
+    color: #ffffff;
+    border-radius: 980px;
+    transition: background-color 0.3s ease;
+  }
+  .btn-danger:hover {
+    background-color: var(--error-hover);
+  }
+  .btn-danger:focus-visible {
+    outline: 2px solid var(--error);
+    outline-offset: 3px;
+  }
+
+  /* 사이드바 폴더 행. 마우스를 올리면 개수 자리에 수정·삭제 버튼이 나타납니다. */
+  .folder-count {
+    transition: opacity 0.3s ease;
+  }
+  .folder-actions {
+    /* 긴 이름 위에 겹쳐도 글자가 비치지 않도록 행과 같은 배경을 깔아 둡니다. */
+    background-color: var(--fill);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .folder-row:hover .nav-item,
+  .folder-row:focus-within .nav-item {
+    background-color: var(--fill);
+    color: var(--text);
+  }
+  .folder-row:hover .folder-count,
+  .folder-row:focus-within .folder-count {
+    opacity: 0;
+  }
+  .folder-row:hover .folder-actions,
+  .folder-row:focus-within .folder-actions {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .folder-action {
+    color: var(--text-sub);
+    transition: color 0.3s ease;
+  }
+  .folder-action:hover {
+    color: var(--text);
+  }
+  .folder-action-danger:hover {
+    color: var(--error);
+  }
+  .folder-action:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  /* 마우스를 올릴 수 없는 기기에서는 버튼을 계속 보여 줍니다. */
+  @media (hover: none) {
+    .folder-count {
+      opacity: 0;
+    }
+    .folder-actions {
+      opacity: 1;
+      pointer-events: auto;
+    }
   }
 
   /* 사이드바·리스트의 탐색 항목. */

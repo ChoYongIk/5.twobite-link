@@ -15,8 +15,12 @@ type FoldersContextValue = {
   folders: Folder[];
   /** 새 폴더를 만들고 만들어진 폴더를 돌려줍니다. */
   addFolder: (name: string) => Folder;
-  /** 같은 이름의 폴더가 이미 있는지 확인합니다. */
-  hasFolderNamed: (name: string) => boolean;
+  /** 폴더 이름을 바꿉니다. */
+  renameFolder: (folderId: string, name: string) => void;
+  /** 폴더를 목록에서 지웁니다. 폴더에 담긴 링크는 그대로 둡니다. */
+  removeFolder: (folderId: string) => void;
+  /** 같은 이름의 폴더가 이미 있는지 확인합니다. 이름을 고치는 중이면 자기 자신은 빼고 봅니다. */
+  hasFolderNamed: (name: string, exceptFolderId?: string) => boolean;
 };
 
 const FoldersContext = createContext<FoldersContextValue | null>(null);
@@ -53,14 +57,30 @@ export function FoldersProvider({
     return folder;
   }, []);
 
+  const renameFolder = useCallback((folderId: string, name: string) => {
+    setFolders((prev) =>
+      prev.map((folder) =>
+        folder.id === folderId ? { ...folder, name: name.trim() } : folder,
+      ),
+    );
+  }, []);
+
+  const removeFolder = useCallback((folderId: string) => {
+    setFolders((prev) => prev.filter((folder) => folder.id !== folderId));
+  }, []);
+
   const hasFolderNamed = useCallback(
-    (name: string) => folders.some((folder) => folder.name === name.trim()),
+    (name: string, exceptFolderId?: string) =>
+      folders.some(
+        (folder) =>
+          folder.id !== exceptFolderId && folder.name === name.trim(),
+      ),
     [folders],
   );
 
   const value = useMemo(
-    () => ({ folders, addFolder, hasFolderNamed }),
-    [folders, addFolder, hasFolderNamed],
+    () => ({ folders, addFolder, renameFolder, removeFolder, hasFolderNamed }),
+    [folders, addFolder, renameFolder, removeFolder, hasFolderNamed],
   );
 
   return (
