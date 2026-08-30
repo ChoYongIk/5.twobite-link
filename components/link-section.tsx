@@ -13,16 +13,16 @@ type LinkSectionProps = {
 export function LinkSection({ title, icon, links }: LinkSectionProps) {
   return (
     <>
-      <div className="mb-5 flex items-baseline gap-2">
+      <div className="mb-12 flex items-center gap-3">
         {icon ? (
-          <span className="text-lg leading-none" aria-hidden>
+          <span className="text-[32px] leading-none" aria-hidden>
             {icon}
           </span>
         ) : null}
-        <h1 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
+        <h1 className="text-[40px] leading-[1.1] font-semibold tracking-[-0.5px] text-[var(--text)]">
           {title}
         </h1>
-        <span className="text-sm tabular-nums text-zinc-400 dark:text-zinc-600">
+        <span className="badge shrink-0 self-center px-3 py-1 text-[13px] leading-[1.4] tabular-nums">
           {links.length}
         </span>
       </div>

@@ -2,14 +2,11 @@
 
 import { useState, type FormEvent } from "react";
 import { FolderSelect } from "./folder-select";
+import { useFolders } from "./folders-provider";
 import { CheckIcon } from "./icons";
 import { SaveButton } from "./save-button";
 import { UrlInput } from "./url-input";
-import { ALL_FOLDER_ID, type Folder } from "@/app/lib/types";
-
-type NewLinkFormProps = {
-  folders: Folder[];
-};
+import { ALL_FOLDER_ID } from "@/app/lib/types";
 
 type FieldErrors = {
   url?: string;
@@ -41,7 +38,8 @@ function validateUrl(value: string): string | undefined {
   return undefined;
 }
 
-export function NewLinkForm({ folders }: NewLinkFormProps) {
+export function NewLinkForm() {
+  const { folders } = useFolders();
   const [url, setUrl] = useState("");
   const [folderId, setFolderId] = useState<string>(ALL_FOLDER_ID);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -72,7 +70,7 @@ export function NewLinkForm({ folders }: NewLinkFormProps) {
     <form
       noValidate
       onSubmit={handleSubmit}
-      className="flex max-w-2xl flex-col gap-5 rounded-xl border border-zinc-200 bg-white p-5 md:p-6 dark:border-zinc-800 dark:bg-zinc-900/40"
+      className="surface flex flex-col gap-5 p-6"
     >
       <UrlInput
         value={url}
@@ -96,9 +94,9 @@ export function NewLinkForm({ folders }: NewLinkFormProps) {
       {saved ? (
         <p
           role="status"
-          className="flex items-start gap-2 rounded-lg bg-emerald-50 px-3 py-2.5 text-sm text-emerald-800 dark:bg-emerald-500/10 dark:text-emerald-300"
+          className="flex items-start gap-2 rounded-[10px] bg-[var(--fill)] px-4 py-3 text-[14px] leading-[1.4] text-[var(--success)]"
         >
-          <CheckIcon className="mt-0.5 size-4 shrink-0" />
+          <CheckIcon className="mt-[3px] size-4 shrink-0" />
           <span>
             <span className="font-medium">{saved.folderName}</span> 폴더에
             담았어요. <span className="break-all">{saved.url}</span>
@@ -106,7 +104,7 @@ export function NewLinkForm({ folders }: NewLinkFormProps) {
         </p>
       ) : null}
 
-      <div className="flex justify-end border-t border-zinc-100 pt-4 dark:border-zinc-800">
+      <div className="flex justify-end border-t border-[var(--divider)] pt-5">
         <SaveButton />
       </div>
     </form>

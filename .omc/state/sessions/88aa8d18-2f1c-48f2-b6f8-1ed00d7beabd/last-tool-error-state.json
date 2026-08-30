@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"ls \\\"C:/Users/yongi/.claude/projects/D--PROJECT2010-develop-project-webdev-5-twobite-link/memory/\\\" 2>&1\",\"description\":\"메모리 디렉터리 확인\"}",
+  "error": "Exit code 2\nls: cannot access 'C:/Users/yongi/.claude/projects/D--PROJECT2010-develop-project-webdev-5-twobite-link/memory/': No such file or directory",
+  "timestamp": "2026-08-17T10:47:50.383Z",
+  "retry_count": 1
+}

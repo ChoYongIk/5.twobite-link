@@ -1,4 +1,4 @@
-import { FormField, fieldBorderClass, fieldClass } from "./form-field";
+import { FormField, fieldClass } from "./form-field";
 import { LinkIcon } from "./icons";
 
 export const URL_FIELD_ID = "link-url";
@@ -18,8 +18,8 @@ export function UrlInput({ value, error, onChange }: UrlInputProps) {
       error={error}
     >
       <div className="relative">
-        <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-zinc-400 dark:text-zinc-600">
-          <LinkIcon className="size-4.5" />
+        <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-[var(--text-sub)]">
+          <LinkIcon className="size-[18px]" />
         </span>
         <input
           id={URL_FIELD_ID}
@@ -34,7 +34,7 @@ export function UrlInput({ value, error, onChange }: UrlInputProps) {
           aria-describedby={
             error ? `${URL_FIELD_ID}-error` : `${URL_FIELD_ID}-hint`
           }
-          className={`${fieldClass} ${fieldBorderClass(Boolean(error))} pr-3 pl-10`}
+          className={`${fieldClass} pl-11`}
         />
       </div>
     </FormField>

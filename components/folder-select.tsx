@@ -1,4 +1,4 @@
-import { FormField, fieldBorderClass, fieldClass } from "./form-field";
+import { FormField, fieldClass } from "./form-field";
 import { ChevronDownIcon } from "./icons";
 import { ALL_FOLDER_ID, type Folder } from "@/app/lib/types";
 
@@ -35,7 +35,7 @@ export function FolderSelect({
           aria-describedby={
             error ? `${FOLDER_FIELD_ID}-error` : `${FOLDER_FIELD_ID}-hint`
           }
-          className={`${fieldClass} ${fieldBorderClass(Boolean(error))} appearance-none pr-10 pl-3`}
+          className={`${fieldClass} appearance-none pr-11`}
         >
           <option value={ALL_FOLDER_ID}>폴더를 선택해 주세요</option>
           {folders.map((folder) => (
@@ -44,8 +44,8 @@ export function FolderSelect({
             </option>
           ))}
         </select>
-        <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-zinc-400 dark:text-zinc-600">
-          <ChevronDownIcon className="size-4.5" />
+        <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-[var(--text-sub)]">
+          <ChevronDownIcon className="size-[18px]" />
         </span>
       </div>
     </FormField>

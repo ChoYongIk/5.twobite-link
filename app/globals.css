@@ -1,26 +1,184 @@
 @import "tailwindcss";
 
+/*
+ * Apple 스타일 디자인 토큰 (라이트모드 전용).
+ * 컴포넌트에서는 Tailwind arbitrary value로만 참조합니다. 예) bg-[var(--surface)]
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --bg: #ffffff;
+  --surface: #fbfbfd;
+  --fill: #f5f5f7;
+  --text: #1d1d1f;
+  --text-sub: #86868b;
+  /* 가이드의 #AEAEB2는 흰 배경 대비 2.2:1이라 3:1을 넘도록 낮췄습니다. */
+  --placeholder: #929296;
+  --border: #d2d2d7;
+  --divider: #e8e8ed;
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  --error: #ff3b30;
+  /* 가이드의 #34C759는 흰 배경 대비 2.2:1이라 3:1을 넘도록 낮췄습니다. */
+  --success: #248a3d;
+  --header-bg: rgba(255, 255, 255, 0.72);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo",
+    "Malgun Gothic", Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  /* 배경만 가진 정적인 면. 보더 없이 미세한 그림자로 구분합니다. */
+  .surface {
+    background-color: var(--surface);
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* 호버에 반응하는 면. 배경색만 아주 미세하게 바뀝니다. */
+  .card {
+    background-color: var(--surface);
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    transition: background-color 0.3s ease;
+  }
+  .card:hover {
+    background-color: var(--fill);
+  }
+
+  /* 기본 버튼: 완전히 둥근 pill. */
+  .btn-primary {
+    background-color: var(--accent);
+    color: #ffffff;
+    border-radius: 980px;
+    transition: background-color 0.3s ease;
+  }
+  .btn-primary:hover {
+    background-color: var(--accent-hover);
+  }
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .btn-primary:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  /* 보조 버튼: 배경도 보더도 없이 액센트 텍스트만. */
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--accent);
+    transition: color 0.3s ease;
+  }
+  .btn-secondary:hover {
+    text-decoration: underline;
+  }
+  .btn-secondary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* 사이드바·리스트의 탐색 항목. */
+  .nav-item {
+    color: var(--text-sub);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .nav-item:hover {
+    background-color: var(--fill);
+    color: var(--text);
+  }
+  .nav-item:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+  .nav-item[aria-current="page"] {
+    background-color: var(--fill);
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* 입력 필드와 셀렉트가 공유하는 스타일. */
+  .field {
+    background-color: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .field::placeholder {
+    color: var(--placeholder);
+  }
+  .field:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.2);
+    outline: none;
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--error);
+  }
+  .field[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.2);
+  }
+
+  /* 뱃지/태그: 옅은 회색 pill. */
+  .badge {
+    background-color: var(--fill);
+    color: var(--text);
+    border-radius: 980px;
+  }
+
+  /* 화면 가운데에 뜨는 모달 패널. Tailwind preflight가 margin을 지워서 직접 가운데로 맞춥니다. */
+  .modal {
+    margin: auto;
+    width: calc(100% - 48px);
+    max-width: 420px;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transition:
+      opacity 0.3s ease,
+      overlay 0.3s ease allow-discrete,
+      display 0.3s ease allow-discrete;
+  }
+  .modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition:
+      opacity 0.3s ease,
+      overlay 0.3s ease allow-discrete,
+      display 0.3s ease allow-discrete;
+  }
+  .modal[open],
+  .modal[open]::backdrop {
+    opacity: 1;
+  }
+  @starting-style {
+    .modal[open],
+    .modal[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  .link-accent {
+    color: var(--accent);
+    transition: color 0.3s ease;
+  }
+  .link-accent:hover {
+    text-decoration: underline;
+  }
+  .link-accent:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
 }

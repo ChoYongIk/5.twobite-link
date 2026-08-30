@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"for i in $(seq 1 30); do if curl -s -o /dev/null -m 2 http://localhost:3001; then echo \\\"server up\\\"; break; fi; sleep 1; done; curl -s -o /dev/null -w \\\"home: %{http_code}\\\\n\\\" -m 60 http...",
+  "error": "Exit code 7\nhome: 000\r\nfolder/dev: 000",
+  "timestamp": "2026-08-17T11:08:56.039Z",
+  "retry_count": 1
+}

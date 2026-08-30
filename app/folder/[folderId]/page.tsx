@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { LinkSection } from "@/components/link-section";
+import { FolderView } from "@/components/folder-view";
 import { PageShell } from "@/components/page-shell";
 import { Workspace } from "@/components/workspace";
 import { folders, links } from "@/app/lib/mock-data";
@@ -15,8 +14,9 @@ export async function generateMetadata({
   const { folderId } = await params;
   const folder = folders.find((item) => item.id === folderId);
 
+  // 화면에서 추가한 폴더는 서버가 이름을 모르므로 중립적인 제목을 씁니다.
   if (!folder) {
-    return { title: "폴더를 찾을 수 없어요 | 한입 링크" };
+    return { title: "폴더 | 한입 링크" };
   }
 
   return {
@@ -29,22 +29,11 @@ export default async function FolderPage({
   params,
 }: PageProps<"/folder/[folderId]">) {
   const { folderId } = await params;
-  const folder = folders.find((item) => item.id === folderId);
-
-  if (!folder) {
-    notFound();
-  }
-
-  const folderLinks = links.filter((link) => link.folderId === folder.id);
 
   return (
     <PageShell>
-      <Workspace folders={folders} links={links}>
-        <LinkSection
-          title={folder.name}
-          icon={folder.emoji}
-          links={folderLinks}
-        />
+      <Workspace links={links}>
+        <FolderView folderId={folderId} links={links} />
       </Workspace>
     </PageShell>
   );

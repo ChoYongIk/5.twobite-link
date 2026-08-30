@@ -37,6 +37,15 @@ export function FolderIcon({ className }: IconProps) {
   );
 }
 
+export function FolderPlusIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h6a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <path d="M12 11.5v4M10 13.5h4" />
+    </svg>
+  );
+}
+
 export function ArrowUpRightIcon({ className }: IconProps) {
   return (
     <svg {...base} className={className}>
