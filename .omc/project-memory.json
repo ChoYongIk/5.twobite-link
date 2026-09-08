@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1788072488467,
+  "lastScanned": 1788855303295,
   "projectRoot": "D:\\PROJECT2010\\develop_project\\webdev\\5.twobite-link",
   "techStack": {
     "languages": [
@@ -78,7 +78,7 @@
       "path": "app",
       "purpose": "Application code",
       "fileCount": 4,
-      "lastAccessed": 1788072488056,
+      "lastAccessed": 1788855302414,
       "keyFiles": [
         "favicon.ico",
         "globals.css",
@@ -89,31 +89,34 @@
     "components": {
       "path": "components",
       "purpose": "UI components",
-      "fileCount": 18,
-      "lastAccessed": 1788072488085,
+      "fileCount": 28,
+      "lastAccessed": 1788855302477,
       "keyFiles": [
-        "empty-state.tsx",
-        "folder-select.tsx",
-        "form-field.tsx",
-        "icons.tsx",
-        "link-card.tsx"
+        "all-links-view.tsx",
+        "delete-folder-modal.tsx",
+        "delete-link-modal.tsx",
+        "edit-link-modal.tsx",
+        "empty-state.tsx"
       ]
     },
     "prompt": {
       "path": "prompt",
       "purpose": null,
-      "fileCount": 2,
-      "lastAccessed": 1788072488086,
+      "fileCount": 9,
+      "lastAccessed": 1788855302539,
       "keyFiles": [
         "prompt1.md",
-        "prompt2.md"
+        "prompt2.md",
+        "prompt3.md",
+        "prompt4.md",
+        "prompt5.md"
       ]
     },
     "public": {
       "path": "public",
       "purpose": "Public files",
       "fileCount": 5,
-      "lastAccessed": 1788072488106,
+      "lastAccessed": 1788855302541,
       "keyFiles": [
         "file.svg",
         "globe.svg",
@@ -126,7 +129,7 @@
       "path": "themes",
       "purpose": null,
       "fileCount": 5,
-      "lastAccessed": 1788072488107,
+      "lastAccessed": 1788855302542,
       "keyFiles": [
         "apple.md",
         "baemin.md",
@@ -135,24 +138,31 @@
         "toss.md"
       ]
     },
+    "utils": {
+      "path": "utils",
+      "purpose": "Utility functions",
+      "fileCount": 0,
+      "lastAccessed": 1788855302554,
+      "keyFiles": []
+    },
+    "app\\api": {
+      "path": "app\\api",
+      "purpose": "API routes",
+      "fileCount": 0,
+      "lastAccessed": 1788855302618,
+      "keyFiles": []
+    },
     "app\\lib": {
       "path": "app\\lib",
       "purpose": "Library code",
       "fileCount": 2,
-      "lastAccessed": 1788072488151,
+      "lastAccessed": 1788855302646,
       "keyFiles": [
         "mock-data.ts",
         "types.ts"
       ]
     }
   },
-  "hotPaths": [
-    {
-      "path": "app/api/og/route.ts",
-      "accessCount": 3,
-      "lastAccessed": 1788079301242,
-      "type": "file"
-    }
-  ],
+  "hotPaths": [],
   "userDirectives": []
 }

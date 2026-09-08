@@ -1,4 +1,4 @@
-import { ArrowUpRightIcon } from "./icons";
+import { ArrowUpRightIcon, PencilIcon, TrashIcon } from "./icons";
 import type { LinkItem } from "@/app/lib/types";
 
 function hostnameOf(url: string) {
@@ -9,8 +9,16 @@ function hostnameOf(url: string) {
   }
 }
 
-export function LinkCard({ link }: { link: LinkItem }) {
+type LinkCardProps = {
+  link: LinkItem;
+  /** 둘 다 넘기면 마우스를 올렸을 때 우측 상단에 수정·삭제 버튼이 나타납니다. */
+  onEdit?: () => void;
+  onDelete?: () => void;
+};
+
+export function LinkCard({ link, onEdit, onDelete }: LinkCardProps) {
   const host = hostnameOf(link.url);
+  const hasActions = Boolean(onEdit && onDelete);
 
   return (
     <article className="card group relative flex h-full flex-col p-6">
@@ -38,7 +46,9 @@ export function LinkCard({ link }: { link: LinkItem }) {
             {link.title}
           </a>
         </h3>
-        <ArrowUpRightIcon className="mt-0.5 size-4 shrink-0 text-[var(--placeholder)]" />
+        <ArrowUpRightIcon
+          className={`${hasActions ? "card-arrow " : ""}mt-0.5 size-4 shrink-0 text-[var(--placeholder)]`}
+        />
       </div>
 
       <p className="mt-1 truncate text-[14px] leading-[1.4] text-[var(--text-sub)]">
@@ -64,6 +74,28 @@ export function LinkCard({ link }: { link: LinkItem }) {
           {link.createdAt}
         </time>
       </div>
+
+      {/* 제목 링크가 카드 전체를 덮고 있어, 그 위로 올라오도록 z-10을 줍니다. */}
+      {hasActions ? (
+        <div className="card-actions absolute top-4 right-4 z-10 flex items-center gap-1.5">
+          <button
+            type="button"
+            onClick={onEdit}
+            aria-label={`${link.title} 링크 수정`}
+            className="card-action flex size-8 items-center justify-center rounded-full outline-none"
+          >
+            <PencilIcon className="size-4" />
+          </button>
+          <button
+            type="button"
+            onClick={onDelete}
+            aria-label={`${link.title} 링크 삭제`}
+            className="card-action card-action-danger flex size-8 items-center justify-center rounded-full outline-none"
+          >
+            <TrashIcon className="size-4" />
+          </button>
+        </div>
+      ) : null}
     </article>
   );
 }

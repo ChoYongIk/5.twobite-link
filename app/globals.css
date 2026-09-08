@@ -236,6 +236,57 @@ body {
     }
   }
 
+  /* 링크 카드. 마우스를 올리면 우측 상단 화살표 자리에 수정·삭제 버튼이 나타납니다. */
+  .card-arrow {
+    transition: opacity 0.3s ease;
+  }
+  .card-actions {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .card:hover .card-arrow,
+  .card:focus-within .card-arrow {
+    opacity: 0;
+  }
+  .card:hover .card-actions,
+  .card:focus-within .card-actions {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .card-action {
+    /* 썸네일 위에 겹쳐도 아이콘이 묻히지 않도록 반투명한 흰 면을 깔아 둡니다. */
+    background-color: var(--header-bg);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    box-shadow: var(--shadow-card);
+    color: var(--text-sub);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+  .card-action:hover {
+    background-color: var(--bg);
+    color: var(--text);
+  }
+  .card-action-danger:hover {
+    color: var(--error);
+  }
+  .card-action:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  /* 마우스를 올릴 수 없는 기기에서는 버튼을 계속 보여 줍니다. */
+  @media (hover: none) {
+    .card-arrow {
+      opacity: 0;
+    }
+    .card-actions {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
   .link-accent {
     color: var(--accent);
     transition: color 0.3s ease;
