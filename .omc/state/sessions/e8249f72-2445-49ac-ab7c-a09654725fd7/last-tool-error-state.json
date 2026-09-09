@@ -1,0 +1,7 @@
+{
+  "tool_name": "PowerShell",
+  "tool_input_preview": "{\"command\":\"$pids = (Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue).OwningProcess | Select-Object -Unique; foreach ($p in $pids) { $proc = Get-CimInstance Win32_Proc...",
+  "error": "Exit code 128\nlistener pid=25660 (node.exe) parent=30508\r\nkilling parent 30508 (node.exe)\r\nERROR: The process \"30508\" not found.\r\nport 3000 free",
+  "timestamp": "2026-09-09T05:52:04.804Z",
+  "retry_count": 1
+}

@@ -13,7 +13,8 @@ type FolderNameModalProps = {
   /** 이름을 고치는 중인 폴더. 새 폴더를 만들 때는 넘기지 않습니다. */
   folder?: Folder | null;
   onClose: () => void;
-  onSubmit: (name: string) => void;
+  /** 저장을 처리합니다. Promise를 돌려주면 끝날 때까지 저장 버튼을 잠급니다. */
+  onSubmit: (name: string) => void | Promise<void>;
 };
 
 /** 폴더 이름을 입력받는 모달. 새 폴더 만들기와 이름 수정이 함께 씁니다. */
@@ -28,6 +29,10 @@ export function FolderNameModal({
   const { hasFolderNamed } = useFolders();
   const [name, setName] = useState("");
   const [error, setError] = useState<string>();
+  // 저장이 끝나기 전에 다시 눌러도 폴더가 두 번 만들어지지 않게 막습니다.
+  // 상태 갱신은 다음 렌더에야 반영되므로 같은 틱의 연타는 ref로 걸러냅니다.
+  const [submitting, setSubmitting] = useState(false);
+  const submittingRef = useRef(false);
 
   // <dialog>의 열림 상태를 React 상태와 맞춥니다. showModal()이 포커스 가둠과 Esc를 담당합니다.
   useEffect(() => {
@@ -39,14 +44,20 @@ export function FolderNameModal({
     if (open && !dialog.open) {
       setName(folder?.name ?? "");
       setError(undefined);
+      setSubmitting(false);
+      submittingRef.current = false;
       dialog.showModal();
     } else if (!open && dialog.open) {
       dialog.close();
     }
   }, [open, folder]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (submittingRef.current) {
+      return;
+    }
 
     const trimmed = name.trim();
     if (!trimmed) {
@@ -58,7 +69,16 @@ export function FolderNameModal({
       return;
     }
 
-    onSubmit(trimmed);
+    submittingRef.current = true;
+    setSubmitting(true);
+    try {
+      await onSubmit(trimmed);
+    } catch {
+      setError("폴더를 저장하지 못했어요. 잠시 후 다시 시도해 주세요.");
+    } finally {
+      submittingRef.current = false;
+      setSubmitting(false);
+    }
   };
 
   // 패널 바깥(백드롭)을 누르면 닫습니다. 패널 안쪽 클릭은 form이 받습니다.
@@ -119,9 +139,11 @@ export function FolderNameModal({
           </button>
           <button
             type="submit"
+            disabled={submitting}
+            aria-busy={submitting || undefined}
             className="btn-primary px-6 py-3 text-[17px] leading-[1.5] font-medium"
           >
-            저장
+            {submitting ? "저장 중…" : "저장"}
           </button>
         </div>
       </form>

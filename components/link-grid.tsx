@@ -12,13 +12,15 @@ export function LinkGrid({ links }: { links: LinkItem[] }) {
   const [linkToEdit, setLinkToEdit] = useState<LinkItem | null>(null);
   const [linkToDelete, setLinkToDelete] = useState<LinkItem | null>(null);
 
-  const handleSubmitEdit = (link: LinkItem, changes: LinkEdit) => {
-    updateLink(link.id, changes);
+  const handleSubmitEdit = async (link: LinkItem, changes: LinkEdit) => {
+    // 저장이 실패하면 모달이 오류를 보여 주도록 닫지 않고 그대로 던집니다.
+    await updateLink(link.id, changes);
     setLinkToEdit(null);
   };
 
-  const handleConfirmDelete = (link: LinkItem) => {
-    removeLink(link.id);
+  const handleConfirmDelete = async (link: LinkItem) => {
+    // 삭제가 실패하면 모달이 오류를 보여 주도록 닫지 않고 그대로 던집니다.
+    await removeLink(link.id);
     setLinkToDelete(null);
   };
 

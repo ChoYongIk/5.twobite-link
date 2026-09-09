@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { FolderSelect } from "./folder-select";
 import { useFolders } from "./folders-provider";
 import { CheckIcon } from "./icons";
@@ -12,6 +12,8 @@ import { ALL_FOLDER_ID } from "@/app/lib/types";
 type FieldErrors = {
   url?: string;
   folder?: string;
+  /** 입력은 맞았지만 테이블에 저장하지 못했을 때. */
+  save?: string;
 };
 
 type SavedLink = {
@@ -82,10 +84,17 @@ export function NewLinkForm() {
   const [folderId, setFolderId] = useState<string>(ALL_FOLDER_ID);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [saved, setSaved] = useState<SavedLink | null>(null);
+  // 저장이 끝나기 전에 다시 눌러도 링크가 여러 개 만들어지지 않게 막습니다.
+  // pending 상태는 다음 렌더에야 버튼을 잠그므로 같은 틱의 연타는 ref로 걸러냅니다.
   const [pending, setPending] = useState(false);
+  const pendingRef = useRef(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (pendingRef.current) {
+      return;
+    }
 
     const selectedFolder = folders.find((folder) => folder.id === folderId);
     const nextErrors: FieldErrors = {
@@ -100,30 +109,38 @@ export function NewLinkForm() {
     }
 
     const trimmedUrl = url.trim();
+    pendingRef.current = true;
     setPending(true);
     setSaved(null);
 
-    const openGraph = await fetchOpenGraph(trimmedUrl);
-    // 정보를 못 읽어도 링크 자체는 잃지 않도록 주소로 최소한을 채웁니다.
-    const title = openGraph?.title?.trim() || hostnameOf(trimmedUrl);
+    try {
+      const openGraph = await fetchOpenGraph(trimmedUrl);
+      // 정보를 못 읽어도 링크 자체는 잃지 않도록 주소로 최소한을 채웁니다.
+      const title = openGraph?.title?.trim() || hostnameOf(trimmedUrl);
 
-    addLink({
-      title,
-      description: openGraph?.description?.trim() ?? "",
-      url: openGraph?.url ?? trimmedUrl,
-      folderId: selectedFolder.id,
-      tags: [],
-      thumbnail: openGraph?.image,
-    });
+      await addLink({
+        title,
+        description: openGraph?.description?.trim() ?? "",
+        url: openGraph?.url ?? trimmedUrl,
+        folderId: selectedFolder.id,
+        tags: [],
+        thumbnail: openGraph?.image,
+      });
 
-    setSaved({
-      title,
-      folderName: selectedFolder.name,
-      partial: openGraph === null,
-    });
-    setUrl("");
-    setFolderId(ALL_FOLDER_ID);
-    setPending(false);
+      setSaved({
+        title,
+        folderName: selectedFolder.name,
+        partial: openGraph === null,
+      });
+      setUrl("");
+      setFolderId(ALL_FOLDER_ID);
+    } catch {
+      // 입력값은 그대로 두어 사용자가 바로 다시 시도할 수 있게 합니다.
+      setErrors({ save: "링크를 저장하지 못했어요. 잠시 후 다시 시도해 주세요." });
+    } finally {
+      pendingRef.current = false;
+      setPending(false);
+    }
   };
 
   return (
@@ -150,6 +167,15 @@ export function NewLinkForm() {
           setErrors((prev) => ({ ...prev, folder: undefined }));
         }}
       />
+
+      {errors.save ? (
+        <p
+          role="alert"
+          className="rounded-[10px] bg-[var(--fill)] px-4 py-3 text-[14px] leading-[1.4] text-[var(--error)]"
+        >
+          {errors.save}
+        </p>
+      ) : null}
 
       {saved ? (
         <p

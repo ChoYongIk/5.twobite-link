@@ -19,13 +19,16 @@ const DESCRIPTION_FIELD_ID = "edit-link-description";
 type FieldErrors = {
   folder?: string;
   title?: string;
+  /** 입력은 맞았지만 테이블에 저장하지 못했을 때. */
+  save?: string;
 };
 
 type EditLinkModalProps = {
   /** 수정 중인 링크. null이면 닫힌 상태입니다. */
   link: LinkItem | null;
   onClose: () => void;
-  onSubmit: (link: LinkItem, changes: LinkEdit) => void;
+  /** 저장을 처리합니다. Promise를 돌려주면 끝날 때까지 저장 버튼을 잠급니다. */
+  onSubmit: (link: LinkItem, changes: LinkEdit) => void | Promise<void>;
 };
 
 /** 링크의 폴더·제목·설명만 고치는 모달. 주소와 썸네일은 그대로 둡니다. */
@@ -36,6 +39,10 @@ export function EditLinkModal({ link, onClose, onSubmit }: EditLinkModalProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
+  // 저장이 끝나기 전에 다시 눌러도 두 번 저장하지 않게 막습니다.
+  // 상태 갱신은 다음 렌더에야 반영되므로 같은 틱의 연타는 ref로 걸러냅니다.
+  const [submitting, setSubmitting] = useState(false);
+  const submittingRef = useRef(false);
 
   // <dialog>의 열림 상태를 React 상태와 맞추고, 열릴 때 지금 값으로 폼을 채웁니다.
   useEffect(() => {
@@ -49,16 +56,18 @@ export function EditLinkModal({ link, onClose, onSubmit }: EditLinkModalProps) {
       setTitle(link.title);
       setDescription(link.description);
       setErrors({});
+      setSubmitting(false);
+      submittingRef.current = false;
       dialog.showModal();
     } else if (!link && dialog.open) {
       dialog.close();
     }
   }, [link]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!link) {
+    if (!link || submittingRef.current) {
       return;
     }
 
@@ -75,11 +84,20 @@ export function EditLinkModal({ link, onClose, onSubmit }: EditLinkModalProps) {
       return;
     }
 
-    onSubmit(link, {
-      folderId,
-      title: trimmedTitle,
-      description: description.trim(),
-    });
+    submittingRef.current = true;
+    setSubmitting(true);
+    try {
+      await onSubmit(link, {
+        folderId,
+        title: trimmedTitle,
+        description: description.trim(),
+      });
+    } catch {
+      setErrors({ save: "링크를 저장하지 못했어요. 잠시 후 다시 시도해 주세요." });
+    } finally {
+      submittingRef.current = false;
+      setSubmitting(false);
+    }
   };
 
   // 패널 바깥(백드롭)을 누르면 닫습니다. 패널 안쪽 클릭은 form이 받습니다.
@@ -161,6 +179,15 @@ export function EditLinkModal({ link, onClose, onSubmit }: EditLinkModalProps) {
               className={`${fieldClass} resize-none`}
             />
           </FormField>
+
+          {errors.save ? (
+            <p
+              role="alert"
+              className="text-[14px] leading-[1.4] text-[var(--error)]"
+            >
+              {errors.save}
+            </p>
+          ) : null}
         </div>
 
         <div className="flex items-center justify-end gap-1">
@@ -173,9 +200,11 @@ export function EditLinkModal({ link, onClose, onSubmit }: EditLinkModalProps) {
           </button>
           <button
             type="submit"
+            disabled={submitting}
+            aria-busy={submitting || undefined}
             className="btn-primary px-6 py-3 text-[17px] leading-[1.5] font-medium"
           >
-            저장
+            {submitting ? "저장 중…" : "저장"}
           </button>
         </div>
       </form>

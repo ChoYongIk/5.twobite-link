@@ -163,6 +163,85 @@
       ]
     }
   },
-  "hotPaths": [],
+  "hotPaths": [
+    {
+      "path": "components/links-provider.tsx",
+      "accessCount": 11,
+      "lastAccessed": 1788939116954,
+      "type": "file"
+    },
+    {
+      "path": "components/folders-provider.tsx",
+      "accessCount": 8,
+      "lastAccessed": 1788932643690,
+      "type": "file"
+    },
+    {
+      "path": "components/folder-name-modal.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1788863859574,
+      "type": "file"
+    },
+    {
+      "path": "components/new-link-form.tsx",
+      "accessCount": 5,
+      "lastAccessed": 1788935598596,
+      "type": "file"
+    },
+    {
+      "path": "components/edit-link-modal.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1788937872307,
+      "type": "file"
+    },
+    {
+      "path": "components/delete-link-modal.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1788939134224,
+      "type": "file"
+    },
+    {
+      "path": "components/sidebar.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1788932646359,
+      "type": "file"
+    },
+    {
+      "path": "app/layout.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1788938360310,
+      "type": "file"
+    },
+    {
+      "path": "components/link-grid.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1788939119699,
+      "type": "file"
+    },
+    {
+      "path": "components/new-folder-button.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1788863863598,
+      "type": "file"
+    },
+    {
+      "path": "C:/Users/yongi/.claude/projects/D--PROJECT2010-develop-project-webdev-5-twobite-link/memory/dev-server-cleanup-taskstop-only.md",
+      "accessCount": 1,
+      "lastAccessed": 1788864465386,
+      "type": "file"
+    },
+    {
+      "path": "app/lib/links.ts",
+      "accessCount": 1,
+      "lastAccessed": 1788935554867,
+      "type": "file"
+    },
+    {
+      "path": "app/lib/get-links.ts",
+      "accessCount": 1,
+      "lastAccessed": 1788938352825,
+      "type": "file"
+    }
+  ],
   "userDirectives": []
 }

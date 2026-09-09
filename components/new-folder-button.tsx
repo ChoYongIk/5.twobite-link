@@ -24,8 +24,9 @@ export function NewFolderButton() {
         open={open}
         title="새 폴더"
         onClose={() => setOpen(false)}
-        onSubmit={(name) => {
-          addFolder(name);
+        onSubmit={async (name) => {
+          // 저장이 실패하면 모달이 오류를 보여 주도록 닫지 않고 그대로 던집니다.
+          await addFolder(name);
           setOpen(false);
         }}
       />

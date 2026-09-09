@@ -21,15 +21,17 @@ export function Sidebar() {
   const countOf = (folderId: string) =>
     links.filter((link) => link.folderId === folderId).length;
 
-  const handleRename = (name: string) => {
+  const handleRename = async (name: string) => {
     if (folderToEdit) {
-      renameFolder(folderToEdit.id, name);
+      // 저장이 실패하면 모달이 오류를 보여 주도록 닫지 않고 그대로 던집니다.
+      await renameFolder(folderToEdit.id, name);
     }
     setFolderToEdit(null);
   };
 
-  const handleConfirmDelete = (folder: Folder) => {
-    removeFolder(folder.id);
+  const handleConfirmDelete = async (folder: Folder) => {
+    // 삭제가 실패하면 모달이 오류를 보여 주도록 닫지 않고 그대로 던집니다.
+    await removeFolder(folder.id);
     setFolderToDelete(null);
 
     // 보고 있던 폴더를 지웠다면 갈 곳이 없어지므로 전체 링크로 옮깁니다.

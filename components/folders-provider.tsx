@@ -5,67 +5,97 @@ import {
   useCallback,
   useContext,
   useMemo,
-  useRef,
   useState,
   type ReactNode,
 } from "react";
+import { toFolder, type FolderRow } from "@/app/lib/folders";
 import type { Folder } from "@/app/lib/types";
+import { createClient } from "@/utils/supabase/client";
 
 type FoldersContextValue = {
   folders: Folder[];
-  /** 새 폴더를 만들고 만들어진 폴더를 돌려줍니다. */
-  addFolder: (name: string) => Folder;
-  /** 폴더 이름을 바꿉니다. */
-  renameFolder: (folderId: string, name: string) => void;
-  /** 폴더를 목록에서 지웁니다. 폴더에 담긴 링크는 그대로 둡니다. */
-  removeFolder: (folderId: string) => void;
+  /** folders 테이블에 새 폴더를 저장하고 만들어진 폴더를 돌려줍니다. 실패하면 throw합니다. */
+  addFolder: (name: string) => Promise<Folder>;
+  /** folders 테이블의 폴더 이름을 고치고 화면 목록에도 반영합니다. 실패하면 throw합니다. */
+  renameFolder: (folderId: string, name: string) => Promise<void>;
+  /**
+   * folders 테이블에서 폴더를 지우고 화면 목록에서도 뺍니다. 실패하면 throw합니다.
+   * links.folder_id는 ON DELETE SET NULL이라 담긴 링크는 남습니다.
+   */
+  removeFolder: (folderId: string) => Promise<void>;
   /** 같은 이름의 폴더가 이미 있는지 확인합니다. 이름을 고치는 중이면 자기 자신은 빼고 봅니다. */
   hasFolderNamed: (name: string, exceptFolderId?: string) => boolean;
 };
 
 const FoldersContext = createContext<FoldersContextValue | null>(null);
 
-/** 아직 이모지를 고르는 UI가 없어 새 폴더에는 기본 아이콘을 붙입니다. */
-const DEFAULT_FOLDER_EMOJI = "📁";
-
 type FoldersProviderProps = {
-  /** 서버에서 내려준 기본 폴더 목록. */
+  /** 서버에서 folders 테이블을 읽어 내려준 폴더 목록. */
   initialFolders: Folder[];
   children: ReactNode;
 };
 
 /**
  * 헤더의 새 폴더 모달과 사이드바가 같은 목록을 보도록 폴더 상태를 한곳에 둡니다.
- * 저장 API가 아직 없어 새 폴더는 새로고침하면 사라집니다.
+ * 폴더 추가·이름 수정·삭제는 모두 folders 테이블에 반영된 뒤 화면 목록을 갱신합니다.
  */
 export function FoldersProvider({
   initialFolders,
   children,
 }: FoldersProviderProps) {
   const [folders, setFolders] = useState(initialFolders);
-  // 난수 대신 증가 번호를 써서 id가 매번 같은 순서로 만들어지게 합니다.
-  const nextNumber = useRef(1);
 
-  const addFolder = useCallback((name: string) => {
-    const folder: Folder = {
-      id: `user-${nextNumber.current}`,
-      name: name.trim(),
-      emoji: DEFAULT_FOLDER_EMOJI,
-    };
-    nextNumber.current += 1;
+  const addFolder = useCallback(async (name: string) => {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("folders")
+      .insert({ name: name.trim() })
+      .select("id, name")
+      .single<FolderRow>();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    const folder = toFolder(data);
     setFolders((prev) => [...prev, folder]);
     return folder;
   }, []);
 
-  const renameFolder = useCallback((folderId: string, name: string) => {
+  const renameFolder = useCallback(async (folderId: string, name: string) => {
+    const trimmed = name.trim();
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("folders")
+      .update({ name: trimmed })
+      .eq("id", Number(folderId))
+      .select("id, name")
+      .single<FolderRow>();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    // DB가 저장한 값을 그대로 쓰면 화면과 테이블이 어긋나지 않습니다.
+    const renamed = toFolder(data);
     setFolders((prev) =>
       prev.map((folder) =>
-        folder.id === folderId ? { ...folder, name: name.trim() } : folder,
+        folder.id === renamed.id ? { ...folder, name: renamed.name } : folder,
       ),
     );
   }, []);
 
-  const removeFolder = useCallback((folderId: string) => {
+  const removeFolder = useCallback(async (folderId: string) => {
+    const supabase = createClient();
+    const { error } = await supabase
+      .from("folders")
+      .delete()
+      .eq("id", Number(folderId));
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
     setFolders((prev) => prev.filter((folder) => folder.id !== folderId));
   }, []);
 
