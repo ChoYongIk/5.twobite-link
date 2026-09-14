@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1788855303295,
+  "lastScanned": 1789365144467,
   "projectRoot": "D:\\PROJECT2010\\develop_project\\webdev\\5.twobite-link",
   "techStack": {
     "languages": [
@@ -78,7 +78,7 @@
       "path": "app",
       "purpose": "Application code",
       "fileCount": 4,
-      "lastAccessed": 1788855302414,
+      "lastAccessed": 1789365144131,
       "keyFiles": [
         "favicon.ico",
         "globals.css",
@@ -90,7 +90,7 @@
       "path": "components",
       "purpose": "UI components",
       "fileCount": 28,
-      "lastAccessed": 1788855302477,
+      "lastAccessed": 1789365144165,
       "keyFiles": [
         "all-links-view.tsx",
         "delete-folder-modal.tsx",
@@ -102,21 +102,21 @@
     "prompt": {
       "path": "prompt",
       "purpose": null,
-      "fileCount": 9,
-      "lastAccessed": 1788855302539,
+      "fileCount": 20,
+      "lastAccessed": 1789365144167,
       "keyFiles": [
         "prompt1.md",
-        "prompt2.md",
-        "prompt3.md",
-        "prompt4.md",
-        "prompt5.md"
+        "prompt10.md",
+        "prompt11.md",
+        "prompt12.md",
+        "prompt13.md"
       ]
     },
     "public": {
       "path": "public",
       "purpose": "Public files",
       "fileCount": 5,
-      "lastAccessed": 1788855302541,
+      "lastAccessed": 1789365144169,
       "keyFiles": [
         "file.svg",
         "globe.svg",
@@ -129,7 +129,7 @@
       "path": "themes",
       "purpose": null,
       "fileCount": 5,
-      "lastAccessed": 1788855302542,
+      "lastAccessed": 1789365144175,
       "keyFiles": [
         "apple.md",
         "baemin.md",
@@ -142,106 +142,28 @@
       "path": "utils",
       "purpose": "Utility functions",
       "fileCount": 0,
-      "lastAccessed": 1788855302554,
+      "lastAccessed": 1789365144191,
       "keyFiles": []
     },
     "app\\api": {
       "path": "app\\api",
       "purpose": "API routes",
       "fileCount": 0,
-      "lastAccessed": 1788855302618,
+      "lastAccessed": 1789365144210,
       "keyFiles": []
     },
     "app\\lib": {
       "path": "app\\lib",
       "purpose": "Library code",
-      "fileCount": 2,
-      "lastAccessed": 1788855302646,
+      "fileCount": 6,
+      "lastAccessed": 1789365144215,
       "keyFiles": [
-        "mock-data.ts",
-        "types.ts"
+        "folders.ts",
+        "get-folders.ts",
+        "get-links.ts"
       ]
     }
   },
-  "hotPaths": [
-    {
-      "path": "components/links-provider.tsx",
-      "accessCount": 11,
-      "lastAccessed": 1788939116954,
-      "type": "file"
-    },
-    {
-      "path": "components/folders-provider.tsx",
-      "accessCount": 8,
-      "lastAccessed": 1788932643690,
-      "type": "file"
-    },
-    {
-      "path": "components/folder-name-modal.tsx",
-      "accessCount": 6,
-      "lastAccessed": 1788863859574,
-      "type": "file"
-    },
-    {
-      "path": "components/new-link-form.tsx",
-      "accessCount": 5,
-      "lastAccessed": 1788935598596,
-      "type": "file"
-    },
-    {
-      "path": "components/edit-link-modal.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1788937872307,
-      "type": "file"
-    },
-    {
-      "path": "components/delete-link-modal.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1788939134224,
-      "type": "file"
-    },
-    {
-      "path": "components/sidebar.tsx",
-      "accessCount": 2,
-      "lastAccessed": 1788932646359,
-      "type": "file"
-    },
-    {
-      "path": "app/layout.tsx",
-      "accessCount": 2,
-      "lastAccessed": 1788938360310,
-      "type": "file"
-    },
-    {
-      "path": "components/link-grid.tsx",
-      "accessCount": 2,
-      "lastAccessed": 1788939119699,
-      "type": "file"
-    },
-    {
-      "path": "components/new-folder-button.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1788863863598,
-      "type": "file"
-    },
-    {
-      "path": "C:/Users/yongi/.claude/projects/D--PROJECT2010-develop-project-webdev-5-twobite-link/memory/dev-server-cleanup-taskstop-only.md",
-      "accessCount": 1,
-      "lastAccessed": 1788864465386,
-      "type": "file"
-    },
-    {
-      "path": "app/lib/links.ts",
-      "accessCount": 1,
-      "lastAccessed": 1788935554867,
-      "type": "file"
-    },
-    {
-      "path": "app/lib/get-links.ts",
-      "accessCount": 1,
-      "lastAccessed": 1788938352825,
-      "type": "file"
-    }
-  ],
+  "hotPaths": [],
   "userDirectives": []
 }

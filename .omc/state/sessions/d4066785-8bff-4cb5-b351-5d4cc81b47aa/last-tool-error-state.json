@@ -1,0 +1,7 @@
+{
+  "tool_name": "mcp__claude-in-chrome__browser_batch",
+  "tool_input_preview": "{\"actions\":[{\"name\":\"javascript_tool\",\"input\":{\"action\":\"javascript_exec\",\"tabId\":1318610844,\"text\":\"const a = [...document.querySelectorAll('a[href^=\\\"/folder/\\\"]')][0]; const href = a?.getAttribute(...",
+  "error": "actions[0] (javascript_tool:javascript_exec) failed: Failed to execute JavaScript: {\"code\":-32000,\"message\":\"Inspected target navigated or closed\"} The tab navigated or was closed mid-evaluation; call tabs_context to refresh tab IDs, then re-run against the current page (avoid long sleeps that span a navigation). (0 completed, 4 remaining)",
+  "timestamp": "2026-09-14T07:16:11.722Z",
+  "retry_count": 1
+}
