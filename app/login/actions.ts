@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
@@ -55,4 +55,23 @@ export async function signIn(
 
   revalidatePath("/", "layout");
   redirect("/");
+}
+
+/**
+ * 카카오 로그인을 시작합니다. Supabase가 돌려준 카카오 인증 주소로 브라우저를 보내고,
+ * 인증이 끝나면 /auth/callback으로 돌아와 세션이 만들어집니다.
+ */
+export async function signInWithKakao() {
+  const origin = (await headers()).get("origin") ?? "";
+  const supabase = createClient(await cookies());
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "kakao",
+    options: { redirectTo: `${origin}/auth/callback` },
+  });
+
+  // 서버에서는 자동으로 이동하지 않으므로 받은 주소로 직접 보냅니다.
+  if (error || !data.url) {
+    redirect("/login?error=oauth");
+  }
+  redirect(data.url);
 }

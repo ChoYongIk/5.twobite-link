@@ -51,13 +51,15 @@ export const updateSession = async (request: NextRequest) => {
   return supabaseResponse
 };
 
-/** 로그인 없이 열 수 있는 경로. API 라우트는 페이지가 아니므로 리다이렉트 대상에서 뺍니다. */
-const PUBLIC_PATHS = ["/login", "/signup"]
+/** 로그인 없이 열 수 있는 경로. API·인증 콜백 라우트는 페이지가 아니므로 리다이렉트 대상에서 뺍니다. */
+const PUBLIC_PATHS = ["/login", "/signup", "/forgot-password"]
 
 function isPublicPath(pathname: string) {
   return (
     PUBLIC_PATHS.some(
       (path) => pathname === path || pathname.startsWith(`${path}/`),
-    ) || pathname.startsWith("/api/")
+    ) ||
+    pathname.startsWith("/api/") ||
+    pathname.startsWith("/auth/")
   )
 }

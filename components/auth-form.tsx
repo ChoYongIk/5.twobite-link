@@ -13,6 +13,8 @@ type AuthFormProps = {
   submitDisabled?: boolean;
   pending?: boolean;
   pendingLabel?: string;
+  /** 제출 버튼 바로 아래에 놓을 요소. 예) 소셜 로그인 버튼 */
+  afterSubmit?: ReactNode;
 };
 
 /**
@@ -27,6 +29,7 @@ export function AuthForm({
   submitDisabled = false,
   pending = false,
   pendingLabel,
+  afterSubmit,
 }: AuthFormProps) {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     if (!action) {
@@ -52,6 +55,8 @@ export function AuthForm({
       >
         {pending && pendingLabel ? pendingLabel : submitLabel}
       </button>
+
+      {afterSubmit}
     </form>
   );
 }

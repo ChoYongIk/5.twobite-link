@@ -1,0 +1,74 @@
+{
+  "agents": [
+    {
+      "agent_id": "acdb50a57076d5de7",
+      "agent_type": "untracked-native-fork",
+      "started_at": "2026-09-15T08:08:00.327Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-09-15T08:08:00.327Z",
+      "synthetic": true,
+      "telemetry_status": "unmatched_stop",
+      "telemetry_note": "SubagentStop arrived without a matching SubagentStart; native Agent/Task start telemetry was not observed."
+    },
+    {
+      "agent_id": "a9644152aea6b5db7",
+      "agent_type": "untracked-native-fork",
+      "started_at": "2026-09-15T08:18:39.152Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-09-15T08:18:39.152Z",
+      "synthetic": true,
+      "telemetry_status": "unmatched_stop",
+      "telemetry_note": "SubagentStop arrived without a matching SubagentStart; native Agent/Task start telemetry was not observed."
+    },
+    {
+      "agent_id": "af65d9251c14f06e2",
+      "agent_type": "untracked-native-fork",
+      "started_at": "2026-09-15T08:21:46.902Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-09-15T08:21:46.902Z",
+      "synthetic": true,
+      "telemetry_status": "unmatched_stop",
+      "telemetry_note": "SubagentStop arrived without a matching SubagentStart; native Agent/Task start telemetry was not observed."
+    },
+    {
+      "agent_id": "a65b38a9e4b95b33e",
+      "agent_type": "untracked-native-fork",
+      "started_at": "2026-09-15T08:24:06.503Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-09-15T08:24:06.503Z",
+      "synthetic": true,
+      "telemetry_status": "unmatched_stop",
+      "telemetry_note": "SubagentStop arrived without a matching SubagentStart; native Agent/Task start telemetry was not observed."
+    },
+    {
+      "agent_id": "a9a7933132dd3b816",
+      "agent_type": "untracked-native-fork",
+      "started_at": "2026-09-15T08:31:05.395Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-09-15T08:31:05.395Z",
+      "synthetic": true,
+      "telemetry_status": "unmatched_stop",
+      "telemetry_note": "SubagentStop arrived without a matching SubagentStart; native Agent/Task start telemetry was not observed."
+    },
+    {
+      "agent_id": "a58ff59b44e7150dc",
+      "agent_type": "untracked-native-fork",
+      "started_at": "2026-09-15T08:34:11.926Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-09-15T08:34:11.926Z",
+      "synthetic": true,
+      "telemetry_status": "unmatched_stop",
+      "telemetry_note": "SubagentStop arrived without a matching SubagentStart; native Agent/Task start telemetry was not observed."
+    }
+  ],
+  "total_spawned": 0,
+  "total_completed": 6,
+  "total_failed": 0,
+  "last_updated": "2026-09-15T08:34:12.038Z"
+}

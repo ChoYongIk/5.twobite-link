@@ -1,0 +1,102 @@
+"use client";
+
+import { useActionState, useCallback, useState } from "react";
+import type { FormEvent } from "react";
+import { AuthForm } from "./auth-form";
+import { FormField, fieldClass } from "./form-field";
+import { Toast } from "./toast";
+import { MIN_PASSWORD_LENGTH } from "@/app/lib/auth";
+import {
+  updatePassword,
+  type UpdatePasswordState,
+} from "@/app/reset-password/actions";
+
+type ToastState = { message: string; key: number };
+
+const initialState: UpdatePasswordState = { at: 0 };
+
+export function ResetPasswordForm() {
+  const [state, formAction, pending] = useActionState(
+    updatePassword,
+    initialState,
+  );
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [toast, setToast] = useState<ToastState | null>(null);
+
+  // 두 칸을 모두 채워야 버튼이 열립니다.
+  const filled = password !== "" && passwordConfirm !== "";
+
+  // 서버 액션이 새 결과를 돌려주면(at이 바뀌면) 그 오류를 토스트로 띄웁니다.
+  // effect 대신 렌더 중에 상태를 맞추는 React 권장 패턴입니다.
+  const [seenAt, setSeenAt] = useState(initialState.at);
+  if (state.at !== seenAt) {
+    setSeenAt(state.at);
+    setToast(state.error ? { message: state.error, key: state.at } : null);
+  }
+
+  const closeToast = useCallback(() => setToast(null), []);
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    // 비밀번호가 다르면 서버까지 가지 않고 바로 알려 줍니다.
+    if (password !== passwordConfirm) {
+      event.preventDefault();
+      setToast({
+        message: "비밀번호가 서로 달라요. 다시 확인해 주세요.",
+        key: Date.now(),
+      });
+    }
+  };
+
+  return (
+    <>
+      {toast ? (
+        <Toast
+          message={toast.message}
+          toastKey={toast.key}
+          onClose={closeToast}
+        />
+      ) : null}
+
+      <AuthForm
+        submitLabel="비밀번호 바꾸기"
+        pendingLabel="바꾸는 중…"
+        action={formAction}
+        onSubmit={handleSubmit}
+        submitDisabled={!filled}
+        pending={pending}
+      >
+        <FormField
+          id="new-password"
+          label="새 비밀번호"
+          hint={`${MIN_PASSWORD_LENGTH}자 이상 입력해 주세요.`}
+        >
+          <input
+            id="new-password"
+            name="password"
+            type="password"
+            autoComplete="new-password"
+            placeholder="새 비밀번호를 입력하세요"
+            aria-describedby="new-password-hint"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            className={fieldClass}
+          />
+        </FormField>
+
+        <FormField id="new-password-confirm" label="새 비밀번호 확인">
+          <input
+            id="new-password-confirm"
+            name="passwordConfirm"
+            type="password"
+            autoComplete="new-password"
+            placeholder="새 비밀번호를 한 번 더 입력하세요"
+            value={passwordConfirm}
+            onChange={(event) => setPasswordConfirm(event.target.value)}
+            className={fieldClass}
+          />
+        </FormField>
+      </AuthForm>
+    </>
+  );
+}

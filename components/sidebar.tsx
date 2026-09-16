@@ -7,6 +7,7 @@ import { FolderNameModal } from "./folder-name-modal";
 import { useFolders } from "./folders-provider";
 import { InboxIcon } from "./icons";
 import { useLinks } from "./links-provider";
+import { LogoutButton } from "./logout-button";
 import { SidebarItem } from "./sidebar-item";
 import type { Folder } from "@/app/lib/types";
 
@@ -78,6 +79,10 @@ export function Sidebar() {
           );
         })}
       </nav>
+
+      <div className="mt-6 border-t border-[var(--divider)] pt-4 md:mt-10">
+        <LogoutButton />
+      </div>
 
       <FolderNameModal
         open={folderToEdit !== null}

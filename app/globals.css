@@ -68,6 +68,18 @@ body {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
   }
+  /* 카카오 공식 버튼 이미지. 색은 이미지가 정하므로 포커스 링과 호버 밝기만 다룹니다. */
+  .kakao-login-button {
+    transition: filter 0.3s ease;
+  }
+  .kakao-login-button:hover:not(:disabled) {
+    filter: brightness(0.96);
+  }
+  .kakao-login-button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
   .btn-primary:disabled {
     opacity: 0.3;
     cursor: not-allowed;

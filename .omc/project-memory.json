@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1789365144467,
+  "lastScanned": 1789458812225,
   "projectRoot": "D:\\PROJECT2010\\develop_project\\webdev\\5.twobite-link",
   "techStack": {
     "languages": [
@@ -78,7 +78,7 @@
       "path": "app",
       "purpose": "Application code",
       "fileCount": 4,
-      "lastAccessed": 1789365144131,
+      "lastAccessed": 1789458811764,
       "keyFiles": [
         "favicon.ico",
         "globals.css",
@@ -89,21 +89,21 @@
     "components": {
       "path": "components",
       "purpose": "UI components",
-      "fileCount": 28,
-      "lastAccessed": 1789365144165,
+      "fileCount": 36,
+      "lastAccessed": 1789458811766,
       "keyFiles": [
         "all-links-view.tsx",
+        "auth-form.tsx",
+        "auth-page.tsx",
         "delete-folder-modal.tsx",
-        "delete-link-modal.tsx",
-        "edit-link-modal.tsx",
-        "empty-state.tsx"
+        "delete-link-modal.tsx"
       ]
     },
     "prompt": {
       "path": "prompt",
       "purpose": null,
-      "fileCount": 20,
-      "lastAccessed": 1789365144167,
+      "fileCount": 27,
+      "lastAccessed": 1789458811806,
       "keyFiles": [
         "prompt1.md",
         "prompt10.md",
@@ -115,21 +115,21 @@
     "public": {
       "path": "public",
       "purpose": "Public files",
-      "fileCount": 5,
-      "lastAccessed": 1789365144169,
+      "fileCount": 9,
+      "lastAccessed": 1789458811807,
       "keyFiles": [
         "file.svg",
         "globe.svg",
-        "next.svg",
-        "vercel.svg",
-        "window.svg"
+        "kakao_login_large_narrow.png",
+        "kakao_login_large_wide.png",
+        "kakao_login_medium_narrow.png"
       ]
     },
     "themes": {
       "path": "themes",
       "purpose": null,
       "fileCount": 5,
-      "lastAccessed": 1789365144175,
+      "lastAccessed": 1789458811808,
       "keyFiles": [
         "apple.md",
         "baemin.md",
@@ -142,25 +142,34 @@
       "path": "utils",
       "purpose": "Utility functions",
       "fileCount": 0,
-      "lastAccessed": 1789365144191,
+      "lastAccessed": 1789458811809,
       "keyFiles": []
+    },
+    "소셜로그인구현하기": {
+      "path": "소셜로그인구현하기",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1789458811813,
+      "keyFiles": [
+        "kakao_app_icon.png"
+      ]
     },
     "app\\api": {
       "path": "app\\api",
       "purpose": "API routes",
       "fileCount": 0,
-      "lastAccessed": 1789365144210,
+      "lastAccessed": 1789458811815,
       "keyFiles": []
     },
     "app\\lib": {
       "path": "app\\lib",
       "purpose": "Library code",
-      "fileCount": 6,
-      "lastAccessed": 1789365144215,
+      "fileCount": 7,
+      "lastAccessed": 1789458811816,
       "keyFiles": [
+        "auth.ts",
         "folders.ts",
-        "get-folders.ts",
-        "get-links.ts"
+        "get-folders.ts"
       ]
     }
   },

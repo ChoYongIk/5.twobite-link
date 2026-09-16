@@ -112,3 +112,11 @@ export function XIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function LogoutIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4M15 8l4 4-4 4M19 12H9" />
+    </svg>
+  );
+}

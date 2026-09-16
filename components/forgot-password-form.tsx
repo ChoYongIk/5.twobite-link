@@ -3,29 +3,31 @@
 import { useActionState, useCallback, useState } from "react";
 import { AuthForm } from "./auth-form";
 import { FormField, fieldClass } from "./form-field";
-import { KakaoLoginButton } from "./kakao-login-button";
+import { CheckIcon } from "./icons";
 import { Toast } from "./toast";
-import { signIn, type SignInState } from "@/app/login/actions";
+import {
+  requestPasswordReset,
+  type ResetRequestState,
+} from "@/app/forgot-password/actions";
 
 type ToastState = { message: string; key: number };
 
-const initialState: SignInState = { at: 0 };
+const initialState: ResetRequestState = { at: 0 };
 
-type LoginFormProps = {
-  /** 페이지가 열릴 때 바로 띄울 오류. 소셜 로그인 콜백이 실패해 되돌아온 경우에 씁니다. */
+type ForgotPasswordFormProps = {
+  /** 페이지가 열릴 때 바로 띄울 오류. 만료된 링크로 되돌아온 경우에 씁니다. */
   initialError?: string;
 };
 
-export function LoginForm({ initialError }: LoginFormProps) {
-  const [state, formAction, pending] = useActionState(signIn, initialState);
+export function ForgotPasswordForm({ initialError }: ForgotPasswordFormProps) {
+  const [state, formAction, pending] = useActionState(
+    requestPasswordReset,
+    initialState,
+  );
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [toast, setToast] = useState<ToastState | null>(
     initialError ? { message: initialError, key: 1 } : null,
   );
-
-  // 두 칸을 모두 채워야 버튼이 열립니다.
-  const filled = email.trim() !== "" && password !== "";
 
   // 서버 액션이 새 결과를 돌려주면(at이 바뀌면) 그 오류를 토스트로 띄웁니다.
   // effect 대신 렌더 중에 상태를 맞추는 React 권장 패턴입니다.
@@ -48,39 +50,43 @@ export function LoginForm({ initialError }: LoginFormProps) {
       ) : null}
 
       <AuthForm
-        submitLabel="로그인"
-        pendingLabel="로그인 중…"
+        submitLabel="재설정 링크 보내기"
+        pendingLabel="보내는 중…"
         action={formAction}
-        submitDisabled={!filled}
+        submitDisabled={email.trim() === ""}
         pending={pending}
-        afterSubmit={<KakaoLoginButton />}
       >
-        <FormField id="login-email" label="이메일">
+        <FormField
+          id="reset-email"
+          label="이메일"
+          hint="가입할 때 쓴 이메일을 입력하면 재설정 링크를 보내 드려요."
+        >
           <input
-            id="login-email"
+            id="reset-email"
             name="email"
             type="email"
             inputMode="email"
             autoComplete="email"
             placeholder="you@example.com"
+            aria-describedby="reset-email-hint"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             className={fieldClass}
           />
         </FormField>
 
-        <FormField id="login-password" label="비밀번호">
-          <input
-            id="login-password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            placeholder="비밀번호를 입력하세요"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            className={fieldClass}
-          />
-        </FormField>
+        {state.sentTo ? (
+          <p
+            role="status"
+            className="flex items-start gap-2 rounded-[10px] bg-[var(--fill)] px-4 py-3 text-[14px] leading-[1.4] text-[var(--success)]"
+          >
+            <CheckIcon className="mt-[3px] size-4 shrink-0" />
+            <span>
+              <span className="font-medium">{state.sentTo}</span> 으로 재설정
+              링크를 보냈어요. 받은 편지함을 확인해 주세요.
+            </span>
+          </p>
+        ) : null}
       </AuthForm>
     </>
   );
