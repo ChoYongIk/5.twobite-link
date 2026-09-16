@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/app/lib/metadata";
 import { AuthPage } from "@/components/auth-page";
 import { LoginForm } from "@/components/login-form";
 
-export const metadata: Metadata = {
-  title: "로그인 | 한입 링크",
+export const metadata = pageMetadata({
+  title: "로그인",
   description: "이메일과 비밀번호로 한입 링크에 로그인하세요.",
-};
+  path: "/login",
+});
 
 export default async function LoginPage({
   searchParams,

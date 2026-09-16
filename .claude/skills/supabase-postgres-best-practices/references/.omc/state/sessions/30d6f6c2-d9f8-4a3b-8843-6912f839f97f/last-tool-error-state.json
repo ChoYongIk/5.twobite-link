@@ -1,0 +1,7 @@
+{
+  "tool_name": "mcp__supabase__execute_sql",
+  "tool_input_preview": "{\"query\":\"create temp table rls_test (step text, result text);\\n\\ndo $$\\ndeclare\\n  a uuid := '919164b9-debd-4403-954f-3c702e896483';\\n  b uuid := '294624a3-b8b2-4e5e-868f-b2debc06da7f';\\n  fid bigint...",
+  "error": "{\"error\":{\"name\":\"HttpException\",\"message\":\"Failed to run sql query: ERROR:  42501: permission denied for table rls_test\\nHINT:  Grant the required privileges to the current role with: GRANT INSERT ON pg_temp_9.rls_test TO authenticated;\\nCONTEXT:  SQL statement \\\"insert into rls_test values ('1 A: 폴더 생성(기본값)', case when saved_uid = a then 'OK user_id=A' else 'FAIL '||saved_uid end)\\\"\\nPL/pgSQL function inline_code_block line 14 at SQL statement\\n\"}}",
+  "timestamp": "2026-09-16T07:31:55.391Z",
+  "retry_count": 1
+}
