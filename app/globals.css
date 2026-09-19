@@ -340,4 +340,18 @@ body {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
   }
+
+  /* 사이드바 맨 아래처럼 눈에 덜 띄어야 하는 회색 링크. 마우스를 올리면 본문색으로 진해집니다. */
+  .link-muted {
+    color: var(--text-sub);
+    transition: color 0.3s ease;
+  }
+  .link-muted:hover {
+    color: var(--text);
+    text-decoration: underline;
+  }
+  .link-muted:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
 }

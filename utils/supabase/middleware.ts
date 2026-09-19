@@ -52,7 +52,7 @@ export const updateSession = async (request: NextRequest) => {
 };
 
 /** 로그인 없이 열 수 있는 경로. API·인증 콜백 라우트는 페이지가 아니므로 리다이렉트 대상에서 뺍니다. */
-const PUBLIC_PATHS = ["/login", "/signup", "/forgot-password"]
+const PUBLIC_PATHS = ["/login", "/signup", "/forgot-password", "/privacy"]
 
 function isPublicPath(pathname: string) {
   return (

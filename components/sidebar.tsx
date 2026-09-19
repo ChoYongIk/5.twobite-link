@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { DeleteFolderModal } from "./delete-folder-modal";
@@ -82,6 +83,12 @@ export function Sidebar() {
 
       <div className="mt-6 border-t border-[var(--divider)] pt-4 md:mt-10">
         <LogoutButton />
+        <Link
+          href="/privacy"
+          className="link-muted mt-1 block rounded-lg px-3 py-2 text-[13px] leading-[1.4] outline-none"
+        >
+          개인정보 처리방침
+        </Link>
       </div>
 
       <FolderNameModal

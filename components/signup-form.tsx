@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useCallback, useState } from "react";
 import type { FormEvent } from "react";
 import { AuthForm } from "./auth-form";
@@ -61,6 +62,15 @@ export function SignupForm() {
         onSubmit={handleSubmit}
         submitDisabled={!filled}
         pending={pending}
+        afterSubmit={
+          <p className="text-center text-[14px] leading-[1.4] text-[var(--text-sub)]">
+            가입하면{" "}
+            <Link href="/privacy" className="link-accent font-medium">
+              개인정보 처리방침
+            </Link>
+            에 동의하는 것으로 봅니다.
+          </p>
+        }
       >
         <FormField id="signup-email" label="이메일">
           <input
